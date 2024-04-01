@@ -70,4 +70,4 @@ Route::get('/tanya/{id?}/comment/{comId?}', function (String $id = NULL,String $
     else{
         return 'id not found';
     }
-});
+})->where('id','[0-9]+')->whereAlpha('comId');
