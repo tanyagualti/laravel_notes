@@ -1,0 +1,73 @@
+we ensure that (validate that) id value in route is in numeric value not string or other so we apply some constraints on it
+if we want value always numeric so method is whereNumber('id')
+if we want value always alphabet so method is whereAlpha('name')
+if we want value always numeric and alphabet both so method is whereAlphaNumeric('name')
+if we want that value is defined by us whereIn('category',['movie','song'])
+if we want first value is @ and then numeric where('id','[@0-9]+')
+
+
+<-----------------------only for numbers---------------------------->
+Route::get('/tanya/{id?}', function (String $id = NULL) {
+    if($id){
+        return "<h1> Post id:". $id ."</h1>";
+    }
+    else{
+        return 'id not found';
+    }
+})->whereNumber('id');
+
+<-----------------------only for alphabet---------------------------->
+Route::get('/tanya/{id?}', function (String $id = NULL) {
+    if($id){
+        return "<h1> Post id:". $id ."</h1>";
+    }
+    else{
+        return 'id not found';
+    }
+})->whereAlpha('id');
+
+
+
+<-----------------------for alpha and numbers---------------------------->
+Route::get('/tanya/{id?}', function (String $id = NULL) {
+    if($id){
+        return "<h1> Post id:". $id ."</h1>";
+    }
+    else{
+        return 'id not found';
+    }
+})->whereAlphaNumeric('id');
+
+
+<-----------------------values which is defined in array---------------------------->
+
+Route::get('/tanya/{id?}', function (String $id = NULL) {
+    if($id){
+        return "<h1> Post id:". $id ."</h1>";
+    }
+    else{
+        return 'id not found';
+    }
+})->whereIn('id',['101','102','103']);
+
+<-------------------------------------we add the regular expresion according to this pas the value--------------------------->
+
+Route::get('/tanya/{id?}', function (String $id = NULL) {
+    if($id){
+        return "<h1> Post id:". $id ."</h1>";
+    }
+    else{
+        return 'id not found';
+    }
+})->where('id','[@1-9]+');
+
+
+<-----------------------we add multiple parameter in route-------------------------->
+Route::get('/tanya/{id?}/comment/{comId?}', function (String $id = NULL,String $comid = NULL) {
+    if($id || $comid){
+        return "<h1> Post id:". $id ."</h1>" ."<h3> comment id:" . $comid . "</h3>";
+    }
+    else{
+        return 'id not found';
+    }
+});
