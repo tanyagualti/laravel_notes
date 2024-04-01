@@ -1,0 +1,24 @@
+
+<---------------------------------first method---------------------------->
+Route::get('/tanya', function () { /tanya is route name which is show in browser to user
+    return view('post'); //post.blade.php is the file which is show in view folder 
+});
+
+<---------------------------------second method---------------------------->
+Route::get('/tanya/sanya', function () { //this is also a way to write route this is called sub route
+    return view('post');
+});
+
+<---------------------------------third method---------------------------->
+Route::view('/tanya','post'); // /tanya is route name post is view name
+
+<---------------------------------Parameterised route---------------------------->
+Route::get('/tanya/{id?}', function (String $id = NULL) { // if i write in url /tanya generally it gives error bcz i use id parameter so we want to add id from user then we find that page
+                                                         //so that is not write so we make the id optional by ? mark and function parameter make null and write the conditition if else
+    if($id){
+        return "<h1> Post id:". $id ."</h1>";
+    }
+    else{
+        return 'id not found';
+    }
+});
