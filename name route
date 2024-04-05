@@ -1,0 +1,11 @@
+// if i want to change the route name so we have to change all veiw pages href of anchor tag
+Route::get('/tanya/sanya', function () {
+    return view('post');
+});
+
+/solution of this problem is name route we use the name function 
+Route::get('/tanya', function () {
+    return view('myfile');
+})->name('mypost');
+//url pr toh tanya hi dikhega anchor tag load krega name('mypost') so agr hum /tanya name change krde toh veiw page pr jake change nhi krna pdega
+ <a href="{{route('mypost')}}">click me</a>
