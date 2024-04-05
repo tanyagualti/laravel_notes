@@ -1,0 +1,4 @@
+//if we are not to show default error page when page will not exist
+Route::fallback(function(){
+return "<h1>Page not found</h1>";
+});
