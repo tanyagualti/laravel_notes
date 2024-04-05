@@ -1,0 +1,25 @@
+//in teeno me ek chiz comman hai /sanya toh hum ise group kr lenge ek new route bna k
+Route::get('/sanya/page1', function () {
+    return view('myfile');
+});
+Route::get('/sanya/page2', function () {
+    return view('myfile');
+});
+Route::get('/sanya/page3', function () {
+    return view('myfile');
+});
+
+
+//toh ab sanya prefix toh rhega aur sub route change hota rhega
+Route::prefix('sanya')->group(function(){
+    Route::get('/page1', function () {
+        return view('welcome');
+    });
+    Route::get('/page2', function () {
+        return view('myfile');
+    });
+    Route::get('/page3', function () {
+        return view('myfile');
+    });
+
+});
