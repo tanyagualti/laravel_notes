@@ -1,0 +1,14 @@
+//if we make the route with the name of /tanya and user save as a bookmark this url after save we change the route name as sanya 
+//so it is not found error is here
+Route::get('/tanya', function () {
+    return view('myfile');
+});
+
+//solution of this problem is redirect
+
+Route::get('/sanya', function () {
+    return view('myfile');
+});
+
+Route::redirect('/tanya','/sanya');
+//first parameter jo user url likhega and second jispe redirect krna hai
