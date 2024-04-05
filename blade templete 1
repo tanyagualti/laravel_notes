@@ -1,0 +1,67 @@
+{{--comment--}}
+{{ "hello" }} 
+{{ $tanya=10; }}
+{!! "<h1>hey</h1>" !!}
+
+
+   @php
+        $i=2;
+        $user=[10,20,30];
+   @endphp
+
+@if ($i==1)
+{{ "true" }}
+@else
+{{"false"}}
+@endif
+
+
+@switch($i)
+    @case(1)
+        {{"true"}}
+        @break
+
+        @case(2)
+        {{"false"}}
+        @break
+
+        @case(3)
+        {{"false"}}
+        @break
+    @default
+        {{"default"}}
+@endswitch
+
+
+
+@isset($i)
+    {{"it is set not null"}}
+@endisset
+
+
+@empty($i)
+    {{"its null"}}
+@endempty
+
+
+@for($i = 0; $i < 10; $i++)
+    {{$i}}
+@endfor
+
+@foreach ($user as $users )
+    {{$users}}
+@endforeach
+
+
+
+@php
+    $a = 0;
+@endphp
+
+@while ($a < 5)
+   {{ $a }}
+    @php
+        $a++;
+    @endphp
+@endwhile
+
