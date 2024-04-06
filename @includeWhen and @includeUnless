@@ -1,0 +1,10 @@
+@php
+    $condition=true;
+@endphp
+@includeWhen($condition,'header',['status'=>'hello'] )
+{{--includeWhen is used to check the condition when $condition true header file is show otherwise not ,acc to that we add any condition which returns value in boolean true and false--}}
+@php
+    $condition=true;
+@endphp
+@includeUnless($condition,'header',['status'=>'hello'] )
+{{ includeUnless is working opposite to includeWhen $condition is true then header file will not show}}
