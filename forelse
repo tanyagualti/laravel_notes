@@ -1,0 +1,11 @@
+@php
+    // $arr=["tan","man","hey"];
+    $arr=[];
+@endphp
+@include('header',['status' => $arr])
+
+@forelse ($arr as $item) //if array has value so print the values
+    <p>{{$item}}</p>
+@empty
+    <p>no value found</p> //if array has not value print the no value found
+@endforelse
