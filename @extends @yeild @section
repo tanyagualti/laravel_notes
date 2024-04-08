@@ -1,0 +1,16 @@
+myfile.blade.php
+<h1>myfile</h1>
+    <h1>header</h1>
+    <section> @yield('content') </section> //yeild is use to get the space which is operate as dynamically
+    <h1>footer</h1>
+
+
+header.blade.php
+ <h1>header file</h1>
+    @extends('myfile') //first we extend(inherit the content of myfile.blade.php content
+    @section('content') //now change the content of dynamically yeild section
+      <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, nostrum!</h1>
+  @endsection
+
+
+//this concept is use for reusable the code
