@@ -1,0 +1,14 @@
+myfile.blade.php
+ <div>
+   @section('footer') 
+   <h1>footer content</h1>
+    @show  {--if i want that after the static content we want to add dynamic content then we use @show --}
+    </div>
+
+
+header.blade.php
+
+ @section('footer')
+  @parent  {--it holdes the existing content--}
+    <p>i am tanya</p> {--it add the dynamic--}
+  @endsection
