@@ -1,0 +1,14 @@
+second.blade.php
+@prepend('style') {{--prepand is used to tell where is place the style}}
+    <style>
+        h1{
+            color:red;
+        }
+    </style>
+@endprepend
+
+master.blade.php
+<head>
+    <title>My Website</title>
+    @stack('style')  //isse phle style lgega bcz prepand()me style likha hai 
+</head>
