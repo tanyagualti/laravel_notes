@@ -1,0 +1,17 @@
+{{--master.blade.php--}}
+ @stack('script')
+
+{{--second.blade.php}}
+@extends('master')
+
+
+
+@push('script')
+    <script src="js/content.js"></script>
+  
+@endpush 
+@push('script')
+    <script src="js/content.js"></script>
+  
+@endpush 
+{{--@section always only one section block will add other will discarded but push add multipple}}
