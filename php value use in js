@@ -1,0 +1,24 @@
+  @php
+       $name="tanya"
+   @endphp
+   <script>
+    var data={{ $name }}; //when we use{{}} for js it is not applicable bcz js not support php format
+ console.log(data);
+   </script>  
+
+
+
+
+
+
+
+
+
+@php
+       $name="tanya"
+   @endphp
+   <script>
+    var data= @json($name);//then we use json directory   json is data exchange format it is universal and independent so js support this json format
+     //first php convert into json format
+ console.log(data);
+   </script>
