@@ -1,0 +1,18 @@
+myfile.blade.php
+ <h1>myfile</h1>
+    <h1>header</h1>
+    @hasSection('content') {--check content section is created or not if created show that content otherwise writtten down no found--}
+    @yield('content')
+    @else
+    <h2>No found</h2>
+    @endif
+    
+    <h1>footer</h1>
+
+header.blade.php
+<h1>header file</h1>
+    @extends('myfile')
+   
+    @section('content')
+      <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, nostrum!</h1>
+  @endsection
