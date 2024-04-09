@@ -1,0 +1,7 @@
+{--when we use this for link css in google show href source like this:'css/style.css'--}
+<link rel="stylesheet" href="css/style.css">
+
+
+{--i want that href link show with domain name like:http://localhost:8000/css/style.css   then we use asset() method--}
+
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
