@@ -15,7 +15,7 @@ function getUser(){
 
 Route::get('/user/{id}', function ($id) {
     $users=getUser();
-abort_if(!isset($users[$id]),404);
+abort_if(!isset($users[$id]),404);//check the condition this id exist in array or not
 
     $user=$users[$id];
     return view('user',['id' => $user]);
