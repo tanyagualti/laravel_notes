@@ -1,0 +1,40 @@
+web.php
+function getUser(){
+   return [
+        1=>["name"=>"tanya","phone"=>"9282526727","city"=>"delhi"],
+        2=>["name"=>"manya","phone"=>"9282526727","city"=>"sre"],
+        3=>["name"=>"sanya","phone"=>"9282526727","city"=>"mumbai"]
+         ];
+}
+
+ Route::get('/master', function () {
+ $name=getUser();
+    
+    return view('master')->withUser($name);
+});
+
+Route::get('/user/{id}', function ($id) {
+    $users=getUser();
+abort_if(!isset($users[$id]),404);
+
+    $user=$users[$id];
+    return view('user',['id' => $user]);
+})->name('view.user');
+
+
+master.blade.php
+
+ @foreach ($user as $id => $u )
+       <h1>{{$id}}{{ $u['name'] }} | {{ $u['phone'] }} | {{ $u['city'] }}|
+    <a href="{{route('view.user',$id)}}">show</a>
+    </h1>
+   @endforeach
+
+
+
+   user.blade.php
+
+   <h1>user detail</h1>
+<h1>Name:{{ $id['name']}}</h1>
+<h1>Name:{{ $id['phone']}}</h1>
+<h1>Name:{{ $id['city']}}</h1>
