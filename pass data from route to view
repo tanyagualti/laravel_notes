@@ -6,3 +6,14 @@ Route::get('/master', function () {
 
 master.blade.php
 <h1>{{$user}}</h1> //print the data which is come from route
+
+{{--we add more than one value--}}
+web.php
+Route::get('/master', function () {
+    $name="tanya";
+    return view('master',['user'=> $name,'city'=> 'delhi']);
+});
+
+master.blade.php
+
+ <h1>{{$user}},{{$city}}</h1>
