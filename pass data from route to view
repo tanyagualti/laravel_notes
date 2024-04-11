@@ -17,3 +17,38 @@ Route::get('/master', function () {
 master.blade.php
 
  <h1>{{$user}},{{$city}}</h1>
+
+
+{{--use js--}}
+
+web.php
+Route::get('/master', function () {
+    $name="tanya";
+    return view('master',['user'=> $name,
+    'city'=> '<script>alert("delhi");</script>']);
+});
+
+master.blade.php
+
+ <h1>{{$user}},{!! $city !!}</h1>
+
+
+// second way to add array
+Route::get('/master', function () {
+  $name="tanya";
+    return view('master')->with('user',$name)->with('city','delhi');
+});
+
+
+//third way to add array
+Route::get('/master', function () {
+  $name="tanya";
+    
+    return view('master')->withUser($name)->withCity('delhi');//with k sth apni key ka name bhi de skte hai
+});
+
+
+
+//master.blade.php
+//check the condition when city may be city get empty and print default value
+   <h1>{{$user}},{{ !empty($city) ? $city :'no city' }}</h1>
