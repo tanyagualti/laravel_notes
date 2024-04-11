@@ -1,0 +1,8 @@
+web.php
+Route::get('/master', function () {
+    $name="tanya";
+    return view('master',['user'=> $name]);
+});
+
+master.blade.php
+<h1>{{$user}}</h1> //print the data which is come from route
