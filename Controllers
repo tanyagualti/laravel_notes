@@ -1,0 +1,20 @@
+UserController.php
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class UserController extends Controller
+{
+    
+function show(){
+    echo "tanya";
+}
+
+}
+
+web.php
+use App\http\controllers\UserController; //give the path of class
+
+Route::get('/shows', [UserController::class,'show']); //and make the route mention the class where show() method exist when w wrute /shows show() method will run
