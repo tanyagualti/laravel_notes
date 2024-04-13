@@ -1,0 +1,10 @@
+Route::get('/shows/{id}', [UserController::class,'show']);
+Route::get('/file/{id}', [UserController::class,'myfile']); //yeh clss bar bar likhni pdh rhi toh hum iska group bnalenge
+web.php
+
+  use App\http\controllers\UserController;
+
+Route::controller(UserController::class)->group(function(){
+    Route::get('/shows/{id}', 'show');
+    Route::get('/file/{id}', 'myfile');
+});
