@@ -1,0 +1,17 @@
+// it is used to undo the previous action
+php artisan migrate:rollback
+
+  // it is used to check status
+  php artisan migrate:status
+
+    // it is used to get empty your database (remove all tables) but laravel ka jo migration name s table tha use delete nhi kregi
+    php artisan migrate:reset
+
+      // yeh reset s jo bhi table remove hui hai use rollback kr degi
+      php artisan migrate:refresh
+
+        // main yeh testing k liye use hoti hai hum bhut sari krte rhte hai testing k liye toh fresh comand phle drop kregi all tables and then migrate kr degi tables
+       php artisan migrate:fresh
+
+      // this command is used to create migrate file and model file with same name task
+         php artisan make:model Task -m
