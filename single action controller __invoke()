@@ -1,0 +1,19 @@
+UserController.php
+class UserController extends Controller
+{
+    // suppose hme isme bhut sare tasks nhi bnane yha alg alg method bnane ki jrurt nhi method ka nam bhi likhne ki jrurt nhi
+    // thats called single action controller iske liye ek predefined method hai 
+    // public function _invoke(){}
+// this is the laravel inbuild method when we call UserController class it will call automatically
+    function __invoke(){ 
+        return view('post');
+    }
+
+}
+
+web.php
+Route::get('/show', UserController::class);
+
+
+post.blade.php
+<h1>post page</h1>
