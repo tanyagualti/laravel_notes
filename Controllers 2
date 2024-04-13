@@ -1,0 +1,24 @@
+web.php
+use App\http\controllers\UserController;
+
+Route::get('/shows/{id}', [UserController::class,'show']); // pass the id in url and accept in show() method parameter
+
+UserController.php
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class UserController extends Controller
+{
+    
+function show(String $id){
+    return view('post',['id'=> $id]);
+//second way   return view('post',compact('id'); iska mtlb hai ki id name ka hi key hai aur id name ka hi variable hai it is a short cut
+} 
+
+}
+
+post.blade.php
+<h1>post page {{ $id }}</h1>
