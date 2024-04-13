@@ -1,0 +1,34 @@
+which is used as a data type in mysql
+
+  string datatypes
+CHAR(size)
+VARCHAR(size)
+BINARY(size)
+VARBINARY(size)
+TINYTEXT
+TEXT(size)
+MEDIUMTEXT
+LONGTEXT
+TINYBLOB
+BLOB(size)
+MEDIUMBLOB
+LONGBLOB
+ENUM(val1,val2,val3...)
+SET(val1,val2,val3..)
+
+
+numeric datatypes
+
+BIT(size)
+TINYINT(size)
+INT(size)
+INTEGER(size)
+SMALLINT(size)
+MEDIUMINT(size)
+BIGINT(size)
+BOOL
+BOOLEAN
+FLOAT(p)
+DOUBLE(size,d)
+DECIMAL(size,d)
+DEC(size,d)
