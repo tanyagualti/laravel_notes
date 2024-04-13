@@ -1,0 +1,53 @@
+<_________________________________________Database Migration____________________________________>
+
+step1  php artisan make:migration create_students_table   //it is artisan command for creating the table in laravel 
+    
+
+
+
+step2 create that file at that path
+D:\laravel\first-project\database\migrations\2024_04_13_121624_create_students_table.php
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up() //void it does not return anything is function k andr inbuild command hai schema
+    {
+        Schema::create('students', function (Blueprint $table) { //schema is class it has methods
+            //  create() it helps to create tables ,that method contain two
+            //  paramaters first table_name second function which has parameter
+            //  blueprint class which has function like string id which use to create 
+            // schema datatype
+            // id create automatically with automatic increment
+          // ----------------------mention datatype of table----------------------
+            $table->id();
+            $table->string('name');
+            // string method is in blueprint class it is work as varchar in mysql
+            $table->string('email');
+            
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('students');
+    }
+};
+
+
+// after finishing step2 still table and columns not created in php my admin we have to follow third step
+php artisan migrate  //this command is used to migrate table into php admin
