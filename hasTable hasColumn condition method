@@ -1,0 +1,21 @@
+public function up()
+    {
+       if(Schema::hasTable('students')){
+        print("yup");
+       }
+       else{
+        print("error");
+       }
+    }
+
+
+
+public function up()
+    {
+       if( Schema::hasColumn('students','name')){
+        print('sucess');
+       }
+       else{
+        print('failure');
+       }
+    }
