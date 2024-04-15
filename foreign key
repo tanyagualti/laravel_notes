@@ -1,0 +1,21 @@
+foreign key write with the create the table
+ public function up()
+    {
+        Schema::create('user', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('stu_id');
+        $table->foreign('stu_id')->references('id')->on('stu');// stu table which has id column
+                          foreign key        second table primary key
+
+      
+        });
+    }
+
+
+     public function up()
+    {
+        Schema::create('stu', function (Blueprint $table) {
+           $table->id();
+           $table->string('name',20);
+        });
+    }
