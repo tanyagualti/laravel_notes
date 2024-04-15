@@ -1,0 +1,11 @@
+ public function up()
+    {
+        Schema::create('love', function (Blueprint $table) {
+            $table->integer('stu_id');//student id 
+            $table->primary('stu_id');//only one primary key in one table 
+            $table->string('email')->unique()->nullable();// email column always unique and it can be contain null value
+            $table->float('percentage',3,2)->comment('student percentge');// add comment
+            $table->string('city')->default('no city');//if user not insert value in city column default value show no city
+            $table->integer('age')->unsigned();//user cannot add value positive or negative it also give integer bcz of unsigned() methd
+        });
+    }
