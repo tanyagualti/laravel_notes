@@ -1,0 +1,17 @@
+table me by default column not Null ka feauture hold krte hai if we want null value contain column we write one method like
+$table->string('email')->nullable();
+
+  unique
+  $table->string('email')->unique();
+
+default
+  $table->string('email')->default('no mail');
+
+primary key
+$table->primary('user_id');
+
+foreign key
+$table->foreign('user_id')->references('id')->on('users');
+
+check
+DB::statement('alter table users add constraint age check(age>18);');
