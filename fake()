@@ -1,0 +1,10 @@
+when we want to add fake names which is not use in website
+public function run()
+    {
+
+        teacher::create([
+           'name'=> fake()->name()
+            ]);
+            }
+
+            output:Durward Feil IV
