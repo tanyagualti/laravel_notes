@@ -1,0 +1,58 @@
+jb bhi hum create method use krte hai toh hme yeh jrur dhyan rkhna hai ki table bnate hue timestamp ko jrur add krna hai qki create method
+ko do aur value insert krwani hoti hai insert wale method me timestamp ki koi jrurt nhi hoti
+
+
+
+
+
+
+TeacherSeeder.php
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
+use App\Models\teacher;
+class TeacherSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+
+        
+$json = File::get(path:'database/json/teacher.json');  //add the path of json data file which is used to add no. of add in a fast and simple way
+$teacher=collect(json_decode($json)); //json_decode php ka ek function hai aur iska kam hai json (file k data) ko convert kr dega array me
+
+ $teacher->each(function($teacher){
+ //yeh jo teacher nam ka variable aa chuka hai uske saath hum chalynge create command ko insert command ko iske sth use nhi kr skte
+teacher::create([
+'name'=> $teacher->name //teacher variable k andr ek column hai name use le lenge
+]);
+    });
+
+
+    }
+}
+
+
+
+
+teacher.json
+
+[
+    {
+        "name":"tanya"
+    },
+    {
+        "name":"himanshi"
+    },
+    {
+       "name":"ritu"
+    }
+]
