@@ -1,0 +1,14 @@
+lavel me database ki coding k liye models ko sikhna pdhna hai aur models ko create krne k liye kuch steps follow krne hote hai
+
+step1 create database
+
+step2 create database migration (create tables in database)
+
+step3 seeding (means hota hai ki hmne second step me jo tables create kiye hai usme fake data dalna for testing purpose)
+( insert initial data in tables)   
+
+dono ways ka kam same hai but
+two ways 1. seeder (in seeder we insert real data which is actually use in website)
+         2. factory (in factory we insert fake data which is use for testing purpose)
+
+step4 create model
