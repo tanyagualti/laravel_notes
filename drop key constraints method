@@ -1,0 +1,10 @@
+$table->dropPrimary('user_id')
+  $table->dropUnique('users_email')
+  $table->dropForeign('user_id_foreign');
+
+  public function up()
+    {
+        Schema::table('librarie', function (Blueprint $table) {
+            $table->dropForeign(['stu_id']);
+        });
+    }
