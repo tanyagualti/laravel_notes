@@ -1,0 +1,5 @@
+php artisan make:seeder StudentSeeder
+php artisan db:seed
+php artisan db:seed --class=UserSeeder
+php artisan db:seed --force
+php artisan db:seed --class=UserSeeder --force
