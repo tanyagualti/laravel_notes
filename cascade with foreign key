@@ -1,0 +1,26 @@
+without cascade we cant't update and delete the table without deleting second table content but in cascading we can do that
+
+
+first table
+public function up()
+    {
+        Schema::create('students', function (Blueprint $table) {
+            $table->id();
+            $table->string('name',20);
+        });
+    }
+
+second table
+
+
+ public function up()
+    {
+        Schema::create('librarie', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('stu_id');
+            $table->foreign('stu_id')->references('id')->on('students')
+                  ->onUpdate('cascade')
+                  ->onDelete('cascade');
+        });
+    }
+
