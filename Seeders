@@ -1,0 +1,116 @@
+
+step-1 php artisan make:model teacher  (isme model ka nam lena hai table k nam pr in sigular when table name is teachers and model name is teacher
+// jb hum seeder me kam kr rhe hote hai toh model ki file me jakr koi kam nhi krna hota yeh just bna k rkh deni hai
+
+
+step-2 php artisan make:seeder TeacherSeeder (yha bhi table k naame pr file seeder ki but nam k age seeder lgana jruri hai)
+
+step-3
+
+//we have to add teacher model file
+use App\Models\teacher;
+class TeacherSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        teacher::create([
+            'name'=>'tanya'
+        ]);
+    }
+}
+
+
+step-4 ab hmne bhut sari seeder ki file bnayi hai toh usme s kon s run krni hai toh yeh hme btana hota hai yeh btate hai
+ DatabaseSeeder.php
+
+<?php
+
+namespace Database\Seeders;
+
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Seed the application's database.
+     *
+     * @return void
+     */
+    public function run()
+    {
+       $this->call([
+        TeacherSeeder::class
+       ]);
+    }
+}
+
+step-5  php artisan db:seed  (is command ka mtlb hai jo bhi seeder bnaye hai vo run krne hai)
+
+
+
+
+
+
+
+-------------------------------create table techers--------------------------------
+
+public function up()
+    {
+        Schema::create('teachers', function (Blueprint $table) {
+            $table->id();
+            $table->string('name',20);
+            $table->timestamps();
+        });
+    }
+
+
+
+
+
+---------------------if we want multiple values insert in table--------------
+
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+use App\Models\teacher;
+class TeacherSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+
+        // if we want to add multiple values now we make a multiple dimensional array
+$teachers=collect([
+
+    [
+        'name'=>'himanshi'
+    ],
+    [
+        'name'=>'khushi'
+    ],
+    [
+        'name'=>'rimmi'
+    ]
+    
+    ]);
+
+    $teachers->each(function($teacher){
+teacher::insert($teacher);
+    });
+
+
+    }
+}
