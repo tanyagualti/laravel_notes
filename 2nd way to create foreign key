@@ -1,0 +1,14 @@
+  //   second way to create foreign key
+  foreignId do kam krta hai stu_id ko create bhi kr dega aur iska data type bhi rkh dega BigInteger aur isko Unsinged bhi bna dega constrained (students)
+  yeh dundega ki students table me primary key kon si hai use hi as a link kr dega foreign key k sth
+    $table->foreignId('stu_id')->constrained('students);
+
+
+     public function up()
+    {
+        Schema::create('lib', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('stu_id')->constrained('students')
+                  ->cascadeOnUpdate()->cascadeOnDelete();
+        });
+    }
