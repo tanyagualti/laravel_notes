@@ -1,0 +1,56 @@
+step-1 php artisan make:student
+
+step-2 php artisan make:factory StudentFactory
+
+StudentFactory.php
+
+<?php
+
+namespace Database\Factories;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Student>
+ */
+class StudentFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition()
+    {
+        return [
+            'name'=> fake()->name()
+        ];
+    }
+}
+
+
+step-3 sedders/databaseSeeder.php
+
+<?php
+
+namespace Database\Seeders;
+
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+use App\Models\student;
+
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Seed the application's database.
+     *
+     * @return void
+     */
+    public function run()
+    {
+      student::factory()->count(5)->create();
+    }
+}
+
+
+step-4 php artisan db:seed
