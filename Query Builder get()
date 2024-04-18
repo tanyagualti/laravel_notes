@@ -1,0 +1,113 @@
+read=get();
+insert=insert()
+update=update();
+delete=delete();
+
+--------------------------read---get()------------------------
+
+UserController.php
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+class UserController extends Controller
+{
+//show method ase hi execute nhi hoga iske liye route create krna pdega web.php me
+    public function show(){
+        $teachers=DB::table('teachers')->get(); //DB is class which is nessesary to perform CRUD operation table method
+                                                 //used to target from which table get the data and get() method is used to 
+                                                 //tell which operation will perform
+        return $teachers;
+    }
+}
+
+
+
+web.app
+ Route::get('/user',[UserController::class,'show']);
+
+
+
+
+
+
+when we want to execute         ----select name from teachers;------
+
+
+
+
+ public function show(){
+        $teachers=DB::table('teachers')->select('name')->get();
+        return $teachers;
+    }
+
+
+
+when we want to execute         ----select * from teachers where id='7';------
+
+public function show(){
+        $teachers=DB::table('teachers')->where('id','=','7')->get();
+        return $teachers;
+    }
+
+
+when we want to execute         ----select * from teachers where id<7 and id!=6;------ 
+
+public function show(){
+        $teachers=DB::table('teachers')->where('id','<',7)->where('id','!=',6)->get();
+        return $teachers;
+    }
+
+
+when we want to execute         ----select * from teachers where name='Seamus Mraz' or id=6;------ 
+class UserController extends Controller
+{
+    public function show(){
+        $teachers=DB::table('teachers')->where('name','=','Seamus Mraz')->orWhere('id','=','6')->get();
+        return $teachers;
+    }
+}
+
+
+when we between 3 and 6
+
+ public function show(){
+        $teachers=DB::table('teachers')->whereBetween('id',[3,6])->get();
+        return $teachers;
+    }
+
+
+when we in 3,6
+ public function show(){
+        $teachers=DB::table('teachers')->whereIn('id',[3,6])->get();
+        return $teachers;
+    }
+
+not in 3,6
+ public function show(){
+        $teachers=DB::table('teachers')->whereNotIn('id',[3,6])->get();
+        return $teachers;
+    }
+
+
+where date
+ public function show(){
+        $teachers=DB::table('teachers')->whereDate('created_at','2024-04-18')->get();
+        return $teachers;
+    }
+
+where time
+
+    public function show(){
+        $teachers=DB::table('teachers')->whereTime('created_at','13:14:18')->get();
+        return $teachers;
+    }
+
+where year
+public function show(){
+        $teachers=DB::table('teachers')->whereYear('created_at','2023')->get();
+        return $teachers;
+    }
