@@ -1,0 +1,128 @@
+pluck('name') it gives the array when we need only names or one column data from database
+distinct () when we select only city and city name repeat again then dictinct method show this city only one time
+when we want to add multiple conditions in where
+ ->where([
+ ['city','=','goa'],['age','>','20']
+ ])
+
+
+ when we check this id is exist 
+ public function showUsers(){
+   if( $teachers=DB::table('teachers')->where('id',11)->exists()){
+        return $teachers;
+    }
+    else{
+        echo 'not exist';
+    }
+   
+}
+when we check this id is not exist
+public function showUsers(){
+   if( $teachers=DB::table('teachers')->where('id',10)->doesntExist()){
+        return $teachers;
+    }
+    else{
+        echo 'exist';
+    }
+   
+}
+
+
+when we want to order the table in context of particular column
+orderBy('age','asc')
+
+
+when we want to get first value from table
+ $teachers=DB::table('teachers')->first();
+        return $teachers;
+
+
+it shows the latest entry
+
+        public function showUsers(){
+    $teachers=DB::table('teachers')->latest()->first();
+        return $teachers;
+    
+   
+}
+it shows the purani entry
+
+public function showUsers(){
+    $teachers=DB::table('teachers')->oldest()->first();
+        return $teachers;
+    
+   
+}
+
+always it gives random values
+
+public function showUsers(){
+    $teachers=DB::table('teachers')->inRandomOrder()->first();
+        return $teachers;
+    
+   
+}
+ 
+when we want to get 4 data only
+public function showUsers(){
+    $teachers=DB::table('teachers')->limit(4)->get();
+        return $teachers;
+    
+   
+}
+ when we see the more values after limit 4 so we use offset
+public function showUsers(){
+    $teachers=DB::table('teachers')->limit(4)->offset(2)->get();
+        return $teachers;
+    
+   
+}
+
+limit() method rename by take()
+offset() method rename by skip()
+
+
+when we want to count the data in table
+public function showUsers(){
+    $teachers=DB::table('teachers')->count();
+        return $teachers;
+    
+   
+}
+
+when we want to get maximum value of id
+
+public function showUsers(){
+    $teachers=DB::table('teachers')->max('id');
+        return $teachers;
+    
+   
+}
+
+
+when we want to get manimum value of id
+
+public function showUsers(){
+    $teachers=DB::table('teachers')->min('id');
+        return $teachers;
+    
+   
+}
+
+find average
+public function showUsers(){
+    $teachers=DB::table('teachers')->avg('id');
+        return $teachers;
+    
+   
+}
+
+
+find sum
+
+public function showUsers(){
+    $teachers=DB::table('teachers')->sum('id');
+        return $teachers;
+    
+   
+}
