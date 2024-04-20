@@ -1,0 +1,9 @@
+public function showUsers(){
+    $teachers=DB::table('teachers')->insertGetId([
+        'name'=>'amit',
+        'email' => 'amit@gmail.com'
+    ]
+);
+     
+return $teachers; //it return the id number of that record not return true false but yeh tbhi kam krega
+jb apke table me auto increment column bhi ho
