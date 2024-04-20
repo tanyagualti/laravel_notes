@@ -1,0 +1,14 @@
+web.php
+Route::get('/home/{id}',[UserController::class,'showUsers'])->name('showUsers');
+UserController.php
+public function showUsers( String $id){
+    $teachers=DB::table('teachers')->where('id',$id)->delete();
+   
+    if($teachers){
+        echo 'sucessfully adeleted';
+    }
+    else{
+        echo 'not deleted';
+    }
+   dd($teachers); //when it run successfully it gives 1 otherwise 0
+}
