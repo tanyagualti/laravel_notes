@@ -1,0 +1,57 @@
+UserController.php
+insert
+public function showUsers(){
+    $teachers=DB::table('teachers')->insert([
+        'name' => 'manya',
+        'created_at' => now(),
+        'updated_at' => now()
+    ]);
+       
+    
+   dd($teachers);//dd method is for debugging purpose query is sucessfully run or not
+}
+
+web.php
+
+Route::get('/home',[UserController::class,'showUsers'])->name('showUsers');
+
+
+update
+
+public function showUsers(){
+    $teachers=DB::table('teachers')->where('id',22)->update([
+        'name' => 'ali'
+       
+    ]);
+        // return $teachers;
+    
+   dd($teachers); //when it run successfully it gives 1 otherwise 0
+}
+
+delete
+
+public function showUsers(){
+    $teachers=DB::table('teachers')->where('id',2)->delete();
+     
+    
+   dd($teachers); //when it run successfully it gives 1 otherwise 0
+}
+
+
+
+
+we can also add msg
+public function showUsers(){
+    $teachers=DB::table('teachers')->where('id',2)->update([
+        'name'=>'ram'
+       
+    ]);
+     
+    if($teachers){
+        echo 'sucessfully added';
+    }
+    else{
+        echo 'not exist';
+    }
+
+
