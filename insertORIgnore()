@@ -1,0 +1,30 @@
+when email will be unique
+public function up()
+    {
+        Schema::create('teachers', function (Blueprint $table) {
+            $table->id();
+            $table->string('name',100);
+            $table->string('email',200)->unique();
+            // $table->timestamps();
+        });
+    }
+
+//so same email can not pass again so we use one method for resrtricting the error msg
+public function showUsers(){
+    $teachers=DB::table('teachers')->insertORIgnore([  //agr email exist krti hogi to insert nhi hoga agr exist nhi krti hogi toh insert ho jayga 
+//but error page nhi ayga agr hum sirf insert use krnge toh error page show hota hai
+        'name'=>'ram',
+        'email' => 'mcclure.libbie@gmail.com'
+
+
+       
+    ]);
+     
+    if($teachers){
+        echo 'sucessfully added';
+    }
+    else{
+        echo 'exist';
+    }
+//    dd($teachers); //when it run successfully it gives 1 otherwise 0
+}
