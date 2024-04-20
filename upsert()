@@ -1,0 +1,11 @@
+upsert means update or insert 
+unique column email agr yeh exist krta hai toh iski other values update ho jyngi 
+agr yeh exist nhi krta hai toh value as a new values insert ho jayngi lkin again same email enter nhi hogi
+
+public function showUsers(){
+    $teachers=DB::table('teachers')->upsert([
+        'name'=>'tovely',
+        'email' => 'lovely@gmail.com'
+    ],['email'] // aur yha unique column bhi parameter me dalna pdhta hai
+
+);
