@@ -1,0 +1,2 @@
+truncate() method is working same as delete() method but ki also reset the id column when we insert the data id start with 1
+but delete() me asa nhi hota
