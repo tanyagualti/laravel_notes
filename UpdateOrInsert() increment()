@@ -1,0 +1,42 @@
+public function showUsers(){
+    $teachers=DB::table('teachers')->updateOrInsert([
+        
+        'email' => 'rmit@gmail.com'  //first check email is exist or not if exist update the name in this case if not exist insert new data
+    ],[
+        'name'=>'rmit'
+    ]
+);
+
+
+increment() me jon c column daloge uski +1 kr dega
+public function showUsers(){
+    $teachers=DB::table('teachers')->where('id',1)->increment('id');
+   
+    if($teachers){
+        echo 'sucessfully added';
+    }
+    else{
+        echo 'exist';
+    }
+   dd($teachers); //when it run successfully it gives 1 otherwise 0
+}
+
+column number dec by 2
+public function showUsers(){
+    $teachers=DB::table('teachers')->where('id',4)->decrement('id',2); //bcz 2 is placed , we can do same thing with increment
+   
+    if($teachers){
+        echo 'sucessfully added';
+    }
+    else{
+        echo 'exist';
+    }
+   dd($teachers); //when it run successfully it gives 1 otherwise 0
+}
+
+agr hme multiple columns ko inc dec krta ho
+public function showUsers(){
+    $teachers=DB::table('teachers')->where('id',4)->incrementEach([
+        'age' => 2, //age inc by 2
+        'votes' => 3 //votes inc by 3
+    ]);
