@@ -81,11 +81,15 @@ Route::get('/user',[UserController::class,'show'])->name('user');
 Route::get('/form', function () {
     return view('form');
 })->name('form');
+
+//jb bhi hum form ko use krte hai toh yha post method ka use krte hai
 Route::post('/addUser',[UserController::class,'add'])->name('addUser');
 
 UserController.php
-public function add(Request $req){
+public function add(Request $req){  //controller bhi form k data ko sidha s read nnhi kr skta  use read krte k liye req class object
+//ki jrurt hoti hai
 $teachers=DB::table('teachers')->insert([
+// 'column_name' => $req->field_name
  'name'=> $req->name,
  'email' => $req->email,
 ]);
