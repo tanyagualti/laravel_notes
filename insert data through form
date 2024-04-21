@@ -1,3 +1,11 @@
+<----------------------------------imp points------------------------------>
+isme hum post ka hi use krte hai aur post k sath csrf ka use krte hai csrf ek technique hoti hai jise hackers 
+
+
+
+
+
+
 allUsers.blade.php
 <!DOCTYPE html>
 <html lang="en">
