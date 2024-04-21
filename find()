@@ -1,0 +1,6 @@
+find() method use to find single data
+public function update(string $id){
+  //  $teachers=DB::table('teachers')->where('id',$id)->get();
+  $teachers=DB::table('teachers')->find($id);
+    return $teachers;
+}
