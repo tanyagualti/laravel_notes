@@ -1,5 +1,16 @@
 <----------------------------------imp points------------------------------>
-isme hum post ka hi use krte hai aur post k sath csrf ka use krte hai csrf ek technique hoti hai jise hackers 
+isme hum post ka hi use krte hai aur post k sath csrf ka use krte hai csrf ek technique hoti hai jise hackers use krte hai hmari website
+ko exploit krne k liye use exploid krte kese hai basically form ka jo input hota hai usme javascript ka mislenious code dal dete hai jisse
+databaase ka server corrupt ho jaye islia sbse phle hme apne form me @csrf ka use krna hota hai yeh compulsory hai nhi toh error aa jaygi
+
+yeh work kese krta hai
+                     token
+server  ------------------------------------> client
+
+jese hi server vo page client ko dene lgeag toh server pr ek token generate hoga hr user k liye unique token number generate hota hai.
+jese hi server vo html ki file client ko send krega whi same token client k pas jayga aur us clent machine me save ho jayga.
+data form me dalnge aur client submit pr click krega toh server sbse phle yeh check krega ki server ka token aur client ka token same hai
+ya nhi tbhbi add delete update krega. aur hacker kbhi bhi same token generate kr hi nhi skta thats why it is secure
 
 
 
