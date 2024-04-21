@@ -1,6 +1,6 @@
 find() method use to find single data
 public function update(string $id){
-  //  $teachers=DB::table('teachers')->where('id',$id)->get();
-  $teachers=DB::table('teachers')->find($id);
+  //  $teachers=DB::table('teachers')->where('id',$id)->get(); //it return json [{"id":6,"name":"Mr. Waino Mertz","email":"mcclure.libbie@gmail.com"}]
+  $teachers=DB::table('teachers')->find($id); //it returns array not json {"id":6,"name":"Mr. Waino Mertz","email":"mcclure.libbie@gmail.com"}
     return $teachers;
 }
