@@ -1,0 +1,9 @@
+Route::get()----->read
+Route::post()------->add,update,delete
+Route::put()--------->update
+Route::patch()---------->update
+Route::delete()--------->delete
+Route::options()------->isme ek method bnana hota hai to us match method me hum jon se method use krnge wi sare use honge
+                            Route::match(['get','post'],'/home',function(){
+                              //code
+                            });
