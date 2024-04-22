@@ -1,0 +1,27 @@
+if we use put() for update 
+Route::put('/updateContent/{id}',[UserController::class,'updateContent'])->name('updateContent');
+ then we use @method('') in form bcz form method only two post and get then for using put delete option and patch we use this nethod
+<form action="{{ route('updateContent',$data->id) }}" method="post">
+        @csrf
+        @method('PUT')
+        <label for="name">name</label>
+        <input type="text" value="{{ $data->name }}" name="name" class="name" id="name"><br>
+        <label for="email">email</label>
+        <input type="email" value="{{ $data->email }}" name="email" class="email" id="email"><br>
+        <input type="submit" value="update">
+    </form>
+
+
+//options()
+//it means hum get post use kr skte hai
+    Route::match(['get','post'],'/updateContent/{id}',function(){
+    return view('user');
+    });
+    Route::match(['get','post'],'/updateContent/{id}',[UserController::class,'updateContent'])->name('updateContent');
+
+    any() mthod of option
+    Route::match('/updateContent/{id}',function(){
+    return view('user');
+    });
+    //it means hum koi bhi method use kr skte hai
+    Route::any('/updateContent/{id}',[UserController::class,'updateContent'])->name('updateContent');
