@@ -1,0 +1,83 @@
+(* isme data jitna ap chahe utna dikhega aur next and previous button sth me ayga next data us button k through next page pr dikhega*)
+all methods syntax are same 
+paginate(5)
+simplePaginate(5)
+->orderBy('name')->cursorPaginate(5) it is not working without orderBy() ->this method is fast as compare to above two,
+it handle large number of data bcz its backend do the indexing in database.indexing ek method hota hai jo table ki catchig kr deta hai
+column wise jese name pass kiya hai toh name wise database me ek catching ho jaygi aur speed fast ho jati hai hum jyada tr usi page ko indexing
+krte hai jise br br open hone hote hai .yeh pagination server ki resources ko jyada use krta hai..toh jo dusre website pr jo dusre process 
+chal rhe hote hai vo slow ho jate hai ini wjh s cursor pagination jyada use nhi krte
+
+yeh next prev button ase hi show nhi honge hme blade templete pr kuch kam krna pdega
+blade.php
+{{ $data->links()  }}
+ public function show()
+    {
+        $users = DB::table('persons')->simplePaginate(2);
+(*         paginate method get method ka kam bhi kud hi kr leta hai alg s likhne ki jrurt nhi pdhti hai *)
+      //   $users = DB::table('persons')->orderBy('name')->simplePaginate(2); it order the table in abcd acc to name
+
+        // Check if $users is a JSON string, and decode it if needed
+        if (is_string($users)) {
+            $users = json_decode($users, true); // Decode JSON string to associative array
+        }
+
+        return view('allUsers', ['data' => $users]);
+    
+
+    }
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <style>
+        th,td{
+            padding: 20px;
+        }
+        .button{
+            background-color: black;
+            color:white;
+            font-size: 20px;
+            width:100px;
+            height:150px;
+            border-radius: 30px;
+            text-decoration: none;
+            padding: 30px;
+            margin: 50px;
+        }
+    </style>
+</head>
+<body>
+   <a class="button"  href="/add">ADD</a>
+    <table style="margin: 100px;" border="2">
+        <thead>
+            <th>id</th>
+            <th>name </th>
+            <th>email</th>
+            <th>Upadate</th>
+            
+        </thead>
+        @foreach ($data as $user)
+        <tbody>
+          
+            <td>{{ $user->id }}</td>
+            <td>{{ $user->name }}</td>
+            <td>{{ $user->email }}</td>
+            <td><a href="{{ route('update', $user->id)}}">update</a></td>
+          
+           
+            
+        </tbody>
+        @endforeach
+    </table>
+    <div class="btn-dark">{{ $data->links() }}</div>  //links method use in paginate
+</body>
+</html>
+
+
