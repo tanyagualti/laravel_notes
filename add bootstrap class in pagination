@@ -54,7 +54,8 @@
         </tbody>
         @endforeach
     </table>
-    <div class="btn-dark">{{ $data->links() }}</div>
+//second way to tell kon sa bootstrap ka version use krna hai.mention nhi krnge toh telwind lg jaygi
+    <div class="btn-dark">{{ $data->links('pagination::bootstrap-5') }}</div>
 </body>
 </html>
 
@@ -89,7 +90,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+//first way to tell version 5 lgana hai ya 4
         Paginator::useBootstrapFive();//then we add this methods for bootstrap class
-        Paginator::useBootstrapFour();
+      //  Paginator::useBootstrapFour();
     }
 }
