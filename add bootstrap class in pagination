@@ -92,6 +92,22 @@ class AppServiceProvider extends ServiceProvider
     {
 //first way to tell version 5 lgana hai ya 4
         Paginator::useBootstrapFive();//then we add this methods for bootstrap class
+
+
+
+
+
+
+
+
+
+
+ $users = DB::table('persons')->paginate(2,['name','email'],'search',2);
+
+first parameter-->kitne records honge ek page pr
+second parameter---->kon kon s column honge
+third parameter------>url pr page= ki wjh kon sa name ayga
+forth parameter--------->page load hote hi kon sa page no show ayga
       //  Paginator::useBootstrapFour();
     }
 }
