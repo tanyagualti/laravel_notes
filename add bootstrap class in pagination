@@ -93,11 +93,15 @@ class AppServiceProvider extends ServiceProvider
 //first way to tell version 5 lgana hai ya 4
         Paginator::useBootstrapFive();//then we add this methods for bootstrap class
 
+UserController.php
+sort is key and vote is value value ko hum dynamic bhi le skte hai aur iska use kr skte hai programming me.in recent case its static
+  $users = DB::table('persons')->paginate(2,['*'],'search')->appends(['sort'=>'vote']);//apepends method is use for add the strings in url
 
 
+//users are static value but we add dynamic value and use it
 
-
-
+ $users = DB::table('persons')->paginate(2,['*'],'search')
+                     ->fragment('users');
 
 
 
