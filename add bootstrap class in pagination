@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+   //if we add paginate() method so telwind CSS framework is applied by default agr hme nhi lgana toh hum uski class ko display none krnge
+    <style>
+       a .w-5{
+        display: none;
+       }
+ span .w-5{
+    display: none;
+ }
+        th,td{
+            padding: 20px;
+        }
+        .button{
+            background-color: black;
+            color:white;
+            font-size: 20px;
+            width:100px;
+            height:150px;
+            border-radius: 30px;
+            text-decoration: none;
+            padding: 30px;
+            margin: 50px;
+        }
+    </style>
+</head>
+<body>
+   <a class="button"  href="/add">ADD</a>
+    <table style="margin: 100px;" border="2">
+        <thead>
+            <th>id</th>
+            <th>name </th>
+            <th>email</th>
+            <th>Upadate</th>
+            
+        </thead>
+        @foreach ($data as $user)
+        <tbody>
+          
+            <td>{{ $user->id }}</td>
+            <td>{{ $user->name }}</td>
+            <td>{{ $user->email }}</td>
+            <td><a href="{{ route('update', $user->id)}}">update</a></td>
+          
+           
+            
+        </tbody>
+        @endforeach
+    </table>
+    <div class="btn-dark">{{ $data->links() }}</div>
+</body>
+</html>
+
+
+
+
+if we want to add bootstrap classs so we want to add methods 
+app\Providers\AppServiceProvider.php
+<?php
+
+namespace App\Providers;
+
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\ServiceProvider;
+
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
+
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        Paginator::useBootstrapFive();//then we add this methods for bootstrap class
+        Paginator::useBootstrapFour();
+    }
+}
