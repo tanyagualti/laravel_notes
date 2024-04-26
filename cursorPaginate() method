@@ -1,0 +1,24 @@
+ public function show()
+    {
+        $users = DB::table('persons')->orderBy('id')->cursorPaginate(3); //is mthod me bootstrap version agr link ke andr hi dalte hai
+toh error ata hai toh appService Provider file me dalnege
+
+        // Check if $users is a JSON string, and decode it if needed
+        if (is_string($users)) {
+            $users = json_decode($users, true); // Decode JSON string to associative array
+        }
+
+        return view('allUsers', ['data' => $users]);
+    
+
+    }
+app service provider
+ public function boot()
+    {
+        // Paginator::useBootstrapFive();
+        Paginator::useBootstrapFour();
+    }
+blade templete
+  <div class="btn-dark">{{ $data->links() }}</div>
+//methods of paginate plz check that website
+<div>total users:{{ $data->count() }}</div>
