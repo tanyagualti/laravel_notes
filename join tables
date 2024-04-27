@@ -1,0 +1,119 @@
+UserController.php
+
+    public function inserts(Request $req){
+        $users=DB::table('student')
+iska mtlb hai student wale table s sare column ko show krna hai aur city wali table s sirf ek hi city name wali table ko show krna hai
+               ->select('student.*','city.city_name')  //this method is used to tell kon kon s data show krne hai table me
+                ->where('age','=','20')
+                  ->join('city','student.city','=','city.cid')
+                   age hmare pass do s jyada table hai toh hum ek bar aur join method use krnge
+                  ->join ('table2','','','')
+                      ->get();
+
+   return view('showUser',compact('users'));
+    }
+
+
+showUser.blade.php
+ <h1>all studnets data</h1>
+    @foreach ( $users as $data )
+<h3>{{ $data->id }}</h3>
+<h3>{{ $data->name }}</h3>
+<h3>{{ $data->age }}</h3>
+<h3>{{ $data->city_name }}</h3>
+<h3>{{ $data->city }}</h3>
+<h3>{{ $data->cid }}</h3>
+<hr>
+        
+    @endforeach
+
+web.php
+Route in group of controller
+Route::get('/inserts',[UserController::class,'inserts']);
+
+
+
+
+
+when we want to count the records
+jb hum count method use krte hai toh hme get method use krne ki jrut nhi hoti qki hum koi data fetch nhi kr rhe
+ public function inserts(Request $req){
+        $users=DB::table('student')
+                    
+                  ->join('city','student.city','=','city.cid')
+                  
+                      ->count();
+
+   return $users;
+    }
+
+
+
+second method of count the records
+ public function inserts(Request $req){
+        $users=DB::table('student')
+                   
+                  ->join('city','student.city','=','city.cid')
+//student_count is key
+                  ->select(DB::raw('count(*) as student_count')) //basically raw mthod is used to write the sql raw queries 
+                      ->get();
+
+   return $users;
+    }
+
+
+//when we wnt to students acc to age 20 age k one student 15 k 4
+
+public function inserts(Request $req){
+        $users=DB::table('student')
+                   
+                  ->join('city','student.city','=','city.cid')
+                  ->select(DB::raw('count(*) as student_count'),'age')
+                  ->groupBy('age')
+                      ->get();
+
+   return $users;
+    }
+
+
+//when we want to count according to city
+ public function inserts(Request $req){
+        $users=DB::table('student')
+                   
+                  ->join('city','student.city','=','city.cid')
+                  ->select(DB::raw('count(*) as student_count'),'city_name')
+                  ->groupBy('city_name')
+                  ->orderBy('student_count','asc')  //studnt count k hisab s sort hoke show ho jayga 1 student 2 ,3
+                      ->get();
+
+   return $users;
+    }
+
+//mostly groupBy method k sath where ka use nhi krte having ka use krte hai but both method working as same
+ public function inserts(Request $req){
+        $users=DB::table('student')
+                   
+                  ->join('city','student.city','=','city.cid')
+                  ->select(DB::raw('count(*) as student_count'),'city_name')
+                  ->groupBy('city_name')
+                  ->having('city_name','=','sre')
+                      ->get();
+
+   return $users;
+    }
+
+//yha unhi student k record dikhao jha 1 aur 2 k bech me hi studnt rhte hai ek city me
+
+    public function inserts(Request $req){
+        $users=DB::table('student')
+                   
+                  ->join('city','student.city','=','city.cid')
+                  ->select(DB::raw('count(*) as student_count'),'city_name')
+                  ->groupBy('city_name')
+                  ->havingBetween('student_count',[1,2])
+                      ->get();
+
+   return $users;
+    }
+
+
