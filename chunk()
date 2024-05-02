@@ -1,0 +1,50 @@
+chunk method ka kam hota hai ki thoda thoda krke data lana small small chunks me yeh koi km data  liye nhi hota hzaro aur lakho k data k liye 
+hota hai agr sara data ek sath fetch krnge toh srever me memory problem ho jati hai
+
+
+class UserController extends Controller
+{
+    public function show()
+    {
+        
+        $user = DB::table('student')->orderBy('id')->chunk(3,function($student){ //3 k chunk me yeh data show hoga
+            echo "<div style='border:2px solid black;'></div>";
+         foreach ($student as  $value) {
+             echo $value->name ."<br>";
+         }
+        });
+
+    }
+
+
+upadate ya delete krne k lye hum chunk method ka use nhi krte usme id proper kam nhi kregi issue aa skta hai isliye hum chunkById() ka use
+krnge
+
+class UserController extends Controller
+{
+    public function show()
+    {
+        
+        $user = DB::table('student')->orderBy('id')->chunkById(3,function($student){
+            echo "<div style='border:2px solid black;'></div>";
+         foreach ($student as  $value) {
+             echo $value->name ."<br>";
+         }
+        });
+
+      
+
+update the status by chunkById method
+class UserController extends Controller
+{
+    public function show()
+    {
+        
+        $user = DB::table('student')->orderBy('id')->chunkById(3,function($student){
+            echo "<div style='border:2px solid black;'></div>";
+         foreach ($student as  $value) {
+            DB::table('student')->where('id',$value->id)->update(['status'=> true]);
+         }
+        });
+
+}
