@@ -1,0 +1,57 @@
+userController.php
+public function show()
+    {
+//union method is use for see the data more than two table but condition is same columns are exist in both table
+        $user = DB::table('user');
+        $student=DB::table('student')->union($user)->get();
+
+        // Check if $users is a JSON string, and decode it if needed
+        if (is_string( $student)) {
+            $users = json_decode( $student, true); // Decode JSON string to associative array
+        }
+
+        return view('allUsers', ['data' =>  $student]);
+       
+    
+
+    }
+
+web.php
+Route::get('/tanya',[UserController::class,'show'])->name('tanya');
+
+allUser.blade.php
+<body>
+   <a class="button"  href="/add">ADD</a>
+    <table style="margin: 100px;" border="2">
+        <thead>
+            <th>id</th>
+            <th>name </th>
+            <th>email</th>
+            <th>Upadate</th>
+            
+        </thead>
+        @foreach ($data as $user)
+        <tbody>
+          
+            <td>{{ $user->id }}</td>
+            <td>{{ $user->name }}</td>
+             <td>{{ $user->age }}</td>
+              <td>{{ $user->city }}</td>
+           
+            <td><a href="{{ route('update', $user->id)}}">update</a></td>
+          
+           
+            
+        </tbody>
+        @endforeach
+    </table>
+   
+</body>
+
+
+
+
+
+if we want to see which sql query was run then we use toSql() method
+$user = DB::table('user');
+        $student=DB::table('student')->union($user)->toSql();
