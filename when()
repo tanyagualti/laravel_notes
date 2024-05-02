@@ -1,0 +1,37 @@
+hum chahte hai where condition bhi sql query me tb run ho jb ek aur condition true ho but raw php me toh if else ka use krte hai
+but laravel me method hai when with2 parameters first parameter is for condition if condition is true where condition is execute otherwise
+all values are show from table
+
+only if
+ public function show()
+    {
+        $number=1;
+        $user = DB::table('student')->when($number>5,function($query){
+        $query->where('age','=','20');
+        })->get();
+      
+
+
+return $user;
+}
+
+
+it is based on if else
+
+class UserController extends Controller
+{
+    public function show()
+    {
+        
+        $user = DB::table('student')->when(false,function($query){
+$query->where('age','>','20');
+        },
+
+        function($query){
+            $query->where('age','<','20');
+
+        })->get();
+      
+
+
+return $user;
