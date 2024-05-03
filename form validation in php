@@ -1,0 +1,110 @@
+welcome.blade.php
+
+//first method to show error
+
+
+is-invalid ki class lg jaygi agr error hogi otherwise nhi
+<form action="/inserts" method="POST">
+    @csrf
+    <label for="name">Name</label>
+    //value="{{ old('name') }}" is mtlb hai ki agr kisi ek field me error hai toh uske upr red error msg toh ata hai but other fields ka old data
+    disappear ho jata hai toh yeh use krne s old data kud aa jayga
+    <input id="name" name="name"  value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror" type="text"><br>
+     <span style="color:red;">@error('name')
+{{ $message }}
+    @enderror</span>
+    <br>
+    <br>
+    <label for="email">Email</label>
+    <input type="email" name="email" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror" id="email"><br>
+     <span style="color:red;">@error('email')
+{{ $message }}
+    @enderror</span>
+    <br>
+     <label for="age">age</label>
+    <input type="text" name="age"  value="{{ old('age') }}" class="form-control @error('age') is-invalid @enderror" id="age"><br>
+     <span style="color:red;">@error('age')
+{{ $message }}
+    @enderror</span>
+    <br>
+  <label for="password">Password</label>
+<input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="password" value="{{ old('password') }}" required>
+@error('password')
+    <span style="color:red;">{{ $message }}</span>
+@enderror
+
+<label for="password_confirmation">Confirm Password</label>
+<input type="password" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror" id="password_confirmation" value="{{ old('password_confirmation') }}" required>
+@error('password_confirmation')
+    <span style="color:red;">{{ $message }}</span>
+@enderror
+
+    <input type="submit" value="submit">
+</form>
+//second method to show error
+@if($errors->any()) //check if any error is there or not
+
+<ul>
+    @foreach($errors->all() as $err)  //it is used to show the proper error msg to user
+<li class="alert alert-danger">
+    {{ $err }}
+</li>
+    @endforeach
+ 
+</ul>
+@endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+web.php
+Route::post('/inserts',[UserController::class,'inserts']);
+Route::get('/login', function () {
+    return view('welcome');
+});
+
+UserController.php
+public function inserts(Request $req){
+        
+          $req->validate([
+'name'=>'required',
+'email'=>'required | email |unique:student,email' ,   //agr hmne html pr validation lgayi type="email" toh hacker use bupass kr skta hai inspect krke form ko type text krke form
+submit kr skta hai toh hme laravel ki validation lgani pdegi email
+//this line is use when we check email is exist or not studnt is table, email is column name in studnt table
+'age' => 'required | numeric | min:18',
+ 'password' => 'required|min:6|alpha_num|lowercase',
+    'cpass' => 'required|same:password,
+          ],[
+//custom error msg
+
+"name.required"=>"name is need",
+"email.required"=>"email is needed",
+"age.required"=>"age is need",
+"age.min"=>"minimum 6",
+"age.numeric"=>"only  numbers"
+]
+
+          );
+
+return $req->all();
+    }
