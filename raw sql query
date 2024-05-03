@@ -1,0 +1,74 @@
+//sometimes its need to apply raw sql query instead of delete update insert method then we use that
+
+
+//in select method we use any select query
+ public function show()
+    {
+       $user= DB::select('select * from user');
+       return $user;
+      
+        }
+//if we add the id value by ? this . toh isse hacker id ki value dekh nhi skta bcz hmne ques mark lagaya hai isse security inc hoti hai
+      
+class UserController extends Controller
+{
+    public function show()
+    {
+       $user= DB::select('select * from user where id=?',[1]);
+       return $user;
+      
+        }
+
+
+//we can add any insert query in insert method
+
+  class UserController extends Controller
+{
+    public function show()
+    {
+       $user= DB::insert('insert into user (name,age,city) values (?, ?, ?)',["ram",21,"sre"]);
+       if($user){
+        echo "done";
+       }
+      
+        }
+//for update
+
+    public function show()
+    {
+       $user= DB::update('update user set city ="delhi" where id =?',[2]);
+       if($user){
+        echo "done";
+       }
+      
+        }
+
+for delete
+  public function show()
+    {
+       $user= DB::delete('delete from user where id =?',[2]);
+       if($user){
+        echo "done";
+       }
+      
+        }
+
+
+//statement method ka bhi use hum query likhne k liye kr skte hai but hum iska use tbhi krte hai jb hme isse koi mtlb nhi hota ki isne
+  kuch return kiya bhi hai ya nhi
+
+  public function show()
+    {
+      $delete =DB::statement('drop table user');
+      
+
+}
+
+  //unprepared is use for only delete and update but it is not secure and it doesnot use ? thats why its unsecure
+
+    public function show()
+    {
+      $delete =DB::unprepared('delete from student where id = 101');
+      
+
+}
