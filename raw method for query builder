@@ -1,0 +1,49 @@
+select
+public function show()
+    {
+      $student=DB::table('student')->selectRaw('name,age')->get();
+      return $student;
+      
+
+}
+
+
+where
+ public function show()
+    {
+      $student=DB::table('student')->whereRaw('age < 15')->get();
+      return $student;
+      
+
+}
+
+ public function show()
+    {
+      $student=DB::table('student')->whereRaw('age < ?',[20])->get();
+      return $student;
+      
+
+}
+
+orderby
+ public function show()
+    {
+      $student=DB::table('student')->orderByRaw('age,city')->get();
+      return $student;
+      
+
+}
+
+
+select k andr bhi raw query likh skte hai
+public function show()
+    {
+      $student=DB::table('student')->select(DB::raw('count(*) as age'))->get();
+      return $student;
+      }
+
+
+
+havingRaw ()
+groupByRaw()
+toSql()
