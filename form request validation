@@ -1,0 +1,111 @@
+vese toh hum custom msg aur vlidation lga rhe the controller file me but agr form ki field 2 ya 3 na hoke 20 ho toh conroller
+file bhut complex ho jaygi toh hum apni ek request class bna skte hai use khte hai form request validation
+
+web.php
+
+Route::get('/add', function () {
+    return view('add');
+})->name('add');
+Route::post('/inserts',[UserController::class,'inserts']);
+
+UserRequest.php
+
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class UserRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;   //authorise function yeh btata hai jo bnda form validate kr rha hai vo authorise hai bhi ya nhi bydefauly yeh false 
+        rkte hai agr rules() fucntion chlana hai toh ise true krna pdega otherwiese error ayga not authorised
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, mixed>
+     */
+    public function rules()
+    {
+        return [
+            'name'=> 'required',
+            'email'=>'required | email'
+        ];
+    }
+      public function messages(){  //function name is same
+        return [
+"name.required"=>":attributes is compulsory",
+"email.required"=>":attributes is compulsory",
+"email.email"=>"plz enter valid email"
+        ];
+    }
+    public function attributes(){ //function name is same
+        return[
+             'name'=> 'User Name',  //we can change attribute name which is show in error msg to user
+            'email'=>'User Email'
+        ];
+    }
+
+      protected function prepareForValidation():void{  //database me insert aur validation k bech me hum apna hi ek kam krwana chahte hai 
+       toh uske liye prepareForValidation method use hoga which is not return anything void but yeh sirf kuch uperation perform krega
+       $this->merge([
+        'name'=> strtoupper($this->name) //yeh input name database me jane s phle upr case me convert hoga tb databse ke store hoga
+       ]);
+
+    }
+
+    //iska mtlb hai agr form m bina kuch fill kiye hum submit button pr click krte hai toh sare error msg show nhi honge bs ek tym pr 
+    ek hi hoga first wala fir next one aur bydefault error value false hoti hai iski
+protected $stopOnFirstFailure=true;
+}
+
+
+
+
+
+
+
+
+
+
+
+UserController.php
+
+ public function inserts(UserRequest $req){ //agr hmne request class apni bnayi hai toh hum yha predefined request class nhi likhnge apni request class likhke uska object bnaynge
+        
+    // return $req->all(); isse sara data fetch ho jata hai all s agr hum chahte hai desired filled hi fetch ho
+   // return $req->only(['name','email']); //isme do hi field show hongi
+ return $req->except(['name']); //isme name ko chod k sari field show hongi
+     }
+
+
+
+add.blade.php
+<body>
+
+    <form action="/inserts" method="post">
+        @csrf
+        <label for="name">name</label>
+        <input type="text" name="name" class="name" id="name"><br>
+       <span style="color:red;"> @error('name')
+{{ $message }}
+    @enderror</span>
+    <br>
+        <label for="email">email</label>
+        <input type="email" name="email" class="email" id="email"><br>
+        <span style="color:red;"> @error('email')
+{{ $message }}
+    @enderror</span>
+    <br>
+        <input type="submit" value="add">
+    </form>
+</body>
