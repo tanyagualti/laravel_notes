@@ -1,0 +1,51 @@
+custom validation rules has two types : 1. usting Rula objects ( can use many time in a website)
+                                        2. use closure (can use one time in a website)
+
+
+step1  php artisan make:rule Uppercase   for make the class file in rule folder which is in app
+
+step2  in passes mwthod in Uppercase class file we write aur custom rule for any field
+public function passes($attribute, $value)
+    {
+        return strtoupper($value) === $value;
+    }
+
+  it helps to check jo value apne input field me dali hai vo upper cse me hai ya nhi
+
+
+
+step3 how to use in userController
+
+
+    public function inserts(Request $req){
+        $req->validate([
+           'name' => ['required',new Uppercase],
+              'email' =>'required | email'
+
+        ]);
+        return $req->all();
+   
+
+     }
+
+
+add.blade.php
+    <form action="/inserts" method="post">
+        @csrf
+        <label for="name">name</label>
+        <input type="text" name="name" class="name" id="name"><br>
+       <span style="color:red;"> @error('name')
+{{ $message }}
+    @enderror</span>
+    <br>
+        <label for="email">email</label>
+        <input type="email" name="email" class="email" id="email"><br>
+        <span style="color:red;"> @error('email')
+{{ $message }}
+    @enderror</span>
+    <br>
+        <input type="submit" value="add">
+    </form>
+
+web.php
+      Route::post('/inserts',[UserController::class,'inserts']);
