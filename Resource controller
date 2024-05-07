@@ -7,11 +7,32 @@ diff between basic and resource controller
 resource controller tb use krte hai jb create delete update insert krna hote hai inbuild method milte hai isme
 method banane ka kam hi km nhi hota resource controller s route ka bhi hota hai isme ek hi route bnana pdega
 
+
+artisan command if we see all routes there name with user
+php artisan route:list --name=user
+ GET|HEAD        user ..................... user.index ΓÇ║ nserController@index
+
+ POST            user ..................... user.store ΓÇ║ nserController@store
+
+ GET|HEAD        user/create ............ user.create ΓÇ║ nserController@create
+
+ GET|HEAD        user/{user} ................ user.show ΓÇ║ nserController@show
+
+ PUT|PATCH       user/{user} ............ user.update ΓÇ║ nserController@update
+
+ DELETE          user/{user} .......... user.destroy ΓÇ║ nserController@destroy
+
+ GET|HEAD        user/{user}/edit ........... user.edit ΓÇ║ nserController@edit
+ it is all resourse comman resuorce me route me ek hi line likhni pdhti hai 
+
+web.php
+Route::resource('user',nserController::class); 
+nserController.class is resouce conteoller file 
+
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
+ use Illuminate\Http\Request;
 
 class nserController extends Controller
 {
@@ -22,7 +43,7 @@ class nserController extends Controller
      */
     public function index()
     {
-        //
+        echo "index";
     }
 
     /**
@@ -32,7 +53,7 @@ class nserController extends Controller
      */
     public function create()
     {
-        //
+        echo "craete";
     }
 
     /**
@@ -54,7 +75,7 @@ class nserController extends Controller
      */
     public function show($id)
     {
-        //
+        echo "show details of single user:$id";
     }
 
     /**
@@ -65,7 +86,7 @@ class nserController extends Controller
      */
     public function edit($id)
     {
-        //
+        echo "edit details of single user:$id";
     }
 
     /**
@@ -77,7 +98,7 @@ class nserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**
@@ -92,3 +113,101 @@ class nserController extends Controller
     }
 }
 
+if we write in url /user we see index
+if we write in url /user/create then we see crete which all is show in above table
+
+
+
+if we dont want to use all methods in are project modeule then we use only method and give the mthod names
+Route::resource('user',nserController::class)->only(['create','index','edit']);
+
+
+
+if i want to change names
+Route::resource('user',nserController::class)->names([
+'create' => 'user.build',
+'show'=> 'user.see'
+]);
+
+ GET|HEAD        user ..................... user.index ΓÇ║ nserController@index
+
+ POST            user ..................... user.store ΓÇ║ nserController@store
+
+ GET|HEAD        user/create ............. user.build ΓÇ║ nserController@create
+
+ GET|HEAD        user/{user} ................. user.see ΓÇ║ nserController@show
+
+ PUT|PATCH       user/{user} ............ user.update ΓÇ║ nserController@update
+
+ DELETE          user/{user} .......... user.destroy ΓÇ║ nserController@destroy
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+if we have multiple resource controller toh uska route bnane k liye ek shot hand ata hai
+
+
+Route::resources([
+    'user' => nserController::class,
+    'post' => postController::class
+]);
+
+
+
+Nested resources
+
+Route::resource('user',nserController::class);
+Route::resource('user.post',postController::class);
+
+GET|HEAD        user/{user}/post .... user.post.index ΓÇ║ postController@index
+
+POST            user/{user}/post .... user.post.store ΓÇ║ postController@store
+
+GET|HEAD        user/{user}/post/create user.post.create ΓÇ║ postController@cΓ
+
+GET|HEAD        user/{user}/post/{post} user.post.show ΓÇ║ postController@show
+
+PUT|PATCH       user/{user}/post/{post} user.post.update ΓÇ║ postController@uΓ
+
+DELETE          user/{user}/post/{post} user.post.destroy ΓÇ║ postController@Γ
+
+GET|HEAD        user/{user}/post/{post}/edit user.post.edit ΓÇ║ postControlleΓ
+
+
+ab problem is that  user/{user}/post/{post} user.post.update in that two id are pass  
+ public function show($id)  //this method id parameter is for post and user thats the problem then we use shallow method
+    {
+        //
+    }
+
+Route::resource('user.post',postController::class)->shallow();
+ab jha jha vo user ki id mang rha hai nhi mangega
+
+GET|HEAD        post/{post} ................ post.show ΓÇ║ postController@show
+
+PUT|PATCH       post/{post} ............ post.update ΓÇ║ postController@update
+
+DELETE          post/{post} .......... post.destroy ΓÇ║ postController@destroy
+
+GET|HEAD        post/{post}/edit ........... post.edit ΓÇ║ postController@edit
+
+GET|HEAD        user/{user}/post .... user.post.index ΓÇ║ postController@index
+
+POST            user/{user}/post .... user.post.store ΓÇ║ postController@store
+
+GET|HEAD        user/{user}/post/create user.post.create ΓÇ║ postController@cΓ
+
+ab yha jha jrurt hai wha user otherwise post
